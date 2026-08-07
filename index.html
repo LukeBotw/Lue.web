@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#03060a">
+<title>LUE</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%235CFFC1' stroke-width='6'/><circle cx='50' cy='50' r='12' fill='%238fd8e0'/></svg>">
+</head>
+<body>
+
+<!--
+  ===========================================================================
+  CREDIT LINE — HARDCODED, NON-REMOVABLE.
+  This element is written directly into the document and is never created,
+  destroyed, toggled, or conditionally rendered by any script. There is no
+  setting that hides it. `css/style.css` pins it with `!important` rules under
+  the "NON-REMOVABLE CREDIT" heading. Leave both in place.
+  ===========================================================================
+-->
+<div class="lue-credit">Made/Directed by Luke with help of AI</div>
+
+<!-- deep-space backdrop -->
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div class="nebula" aria-hidden="true"></div>
+<div class="grid-veil" aria-hidden="true"></div>
+
+<!-- ======================= APP ======================= -->
+<div id="app" class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="brand">LUE<span class="brand-dot">.</span>SYSTEM</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="hex" id="sessionHex">0x00000</span>
+    </div>
+    <div class="topbar-right">
+      <span class="stat"><span class="stat-k">STATUS</span><b id="statusVal" class="stat-v ok">ONLINE</b></span>
+      <span class="stat"><span class="stat-k">CORE</span><b id="providerVal" class="stat-v">GEMINI</b></span>
+    </div>
+  </header>
+
+  <main class="stage">
+
+    <!-- ---------- orb column ---------- -->
+    <section class="orb-column">
+      <div id="orbStage" class="orb-stage">
+        <canvas id="rings" aria-hidden="true"></canvas>
+        <canvas id="orb" aria-hidden="true"></canvas>
+        <div id="orbCaption" class="orb-caption"></div>
+      </div>
+
+      <div class="rail">
+        <div class="rail-item">
+          <span class="rail-k">USED</span>
+          <span class="rail-v" id="railMsgs" title="Requests spent today — Gemini · Claude">G 0 · C 0</span>
+        </div>
+        <div class="rail-item">
+          <span class="rail-k">CAM</span>
+          <span class="rail-v" id="railCam">OFF</span>
+        </div>
+        <div class="rail-item">
+          <span class="rail-k">MIC</span>
+          <span class="rail-v" id="railMic">OFF</span>
+        </div>
+        <div class="rail-item">
+          <span class="rail-k">MODE</span>
+          <span class="rail-v" id="railMode">IDLE</span>
+        </div>
+      </div>
+
+      <!-- webcam preview: only visible while the camera is on -->
+      <div id="camPod" class="cam-pod" hidden>
+        <video id="camVideo" playsinline muted autoplay></video>
+        <span class="cam-live">● LIVE</span>
+      </div>
+    </section>
+
+    <!-- ---------- chat column ---------- -->
+    <section class="chat-column">
+      <div class="chat-head">
+        <span class="chat-title">TRANSMISSION LOG</span>
+        <div class="chat-indicators">
+          <span id="camIndicator" class="indicator indicator--cam" hidden>◉ CAMERA ACTIVE</span>
+          <span id="micIndicator" class="indicator indicator--mic" hidden>◉ MIC ACTIVE</span>
+        </div>
+      </div>
+
+      <div id="chatLog" class="chat-log" role="log" aria-live="polite"></div>
+
+      <div class="composer">
+        <div class="composer-tools">
+          <button id="camBtn" class="tool" type="button" aria-pressed="false" title="Toggle camera">
+            <span class="tool-icon" aria-hidden="true">▣</span><span class="tool-label">Camera</span>
+          </button>
+          <button id="micBtn" class="tool" type="button" aria-pressed="false" title="Toggle microphone">
+            <span class="tool-icon" aria-hidden="true">≋</span><span class="tool-label">Mic</span>
+          </button>
+          <button id="drawBtn" class="tool" type="button" title="Chart a constellation">
+            <span class="tool-icon" aria-hidden="true">✦</span><span class="tool-label">Draw</span>
+          </button>
+          <span class="composer-spacer"></span>
+          <span id="charCount" class="char-count" aria-live="polite"></span>
+        </div>
+
+        <div class="composer-row">
+          <textarea id="textInput" class="composer-input" rows="1"
+                    placeholder="Ask Lue anything — or say “draw a lighthouse”…"
+                    autocomplete="off" spellcheck="true"></textarea>
+          <button id="sendBtn" class="send" type="button" aria-label="Send message">
+            <span aria-hidden="true">➤</span>
+          </button>
+        </div>
+
+        <p id="composerNote" class="composer-note" role="alert" hidden></p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/starfield.js"></script>
+<script src="js/orb.js"></script>
+<script src="js/providers.js"></script>
+<script src="js/constellation.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
